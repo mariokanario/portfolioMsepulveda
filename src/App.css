@@ -1,0 +1,120 @@
+#root{
+  background-color: #040B15;
+  overflow-x: hidden;
+}
+
+nav{
+  background-color: #040B15;
+}
+.green {
+  color: #10DD92;
+}
+
+.canvas-cont {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+#canvas3d {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+#canvas3d.show {
+  opacity: 1;
+}
+
+section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.header {
+  height: 100vh;
+  display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+}
+
+.logo {
+  width: 200px;
+}
+
+.hamburger-inner, 
+.hamburger-inner::after, 
+.hamburger-inner::before,
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::after,
+.hamburger.is-active .hamburger-inner::before
+{
+  background-color: white;
+}
+
+.loading{
+  transform: translateY(-90px);
+  width: 150px;
+  animation: loading 3s infinite linear;
+}
+
+@keyframes loading {
+  0%{
+    transform: translateY(-90px) rotate(0deg);
+  }
+
+  100%{
+    transform: translateY(-90px)  rotate(360deg);;
+  }
+}
+
+
+.static-text{
+  position: fixed;
+  transform: translate(-50%, -50%);
+}
+
+
+.cont-dev, .cont-des{
+  height: 200vh;
+}
+
+.skills img{
+  width: 50px;
+}
+/* 
+.dev-section, .des-section{
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+}
+ */
+.contact{
+  position: relative;
+  z-index: 3;
+  background-color: #072C51;
+
+}
+
+.btn-bar{
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: white;
+  text-align: center;
+  transition: all .3s;
+
+  &:hover{
+    color: #ffffff;
+    transform: translateX(10px);
+  }
+}
+
+
+
