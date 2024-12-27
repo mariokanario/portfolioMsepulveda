@@ -29,6 +29,8 @@ a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
+  position: relative;
+  z-index: 100;
 }
 
 a:hover {
