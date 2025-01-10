@@ -22,13 +22,22 @@ gsap.registerPlugin(ScrollTrigger, Observer, ScrollToPlugin);
 
 function App() {
 
-
   const [isLoaded, setIsLoaded] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
     AOS.init();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize); // Cleanup
   }, []);
 
   useEffect(() => {
@@ -37,10 +46,16 @@ function App() {
 
     app.load('https://prod.spline.design/X72BKNI5K1sOZpv7/scene.splinecode')
       .then(() => {
-        setIsLoaded(true); // Escena completamente cargada
+        setIsLoaded(true);
         setTimeout(() => setShowContent(true), 500);
 
         // TEXTO HEADER
+
+       
+
+        // Limpia las animaciones previas
+        gsap.globalTimeline.clear();
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 
         gsap.to("#static-text", {
           opacity: 0,
@@ -52,83 +67,49 @@ function App() {
           },
         });
 
-        
-
-        // PLANETA DESKTOP
-        const isMobile = window.innerWidth <= 768;
-
-        const planet = app.findObjectByName("PlanetContainer")
-
-        
-
+        const planet = app.findObjectByName("PlanetContainer");
 
         if (!isMobile) {
-
           gsap.to(planet.scale, { x: 0.7, y: 0.7, z: 0.7 }, 0);
 
-          const timeline1 = gsap
-            .timeline({
-              scrollTrigger: {
-                trigger: "#cont-dev",
-                start: "top center",
-                end: "bottom bottom",
-                scrub: true,
-              },
-            })
-            .to(planet.scale,
-              { x: 1.5, y: 1.5, z: 1.5 }, 0
-            )
-            .to(planet.position,
-              { x: -400, y: -50 }, 0
-            )
-            .to(planet.rotation,
-              { y: -1.5 }, 0
-            )
-
-        }
-
-        const timeline2 = gsap
-          .timeline({
+          const timeline1 = gsap.timeline({
             scrollTrigger: {
-              trigger: "#cont-des",
+              trigger: "#cont-dev",
               start: "top center",
               end: "bottom bottom",
               scrub: true,
             },
           })
-          .to(planet.rotation,
-            { y: 1.5 }, 0
-          )
-
-          // PLANETA MOBILE
-        if (isMobile) {
-          gsap.set(planet.scale, { x: .6, y: .6, z: .6 }, 0);
-          const timeline1 = gsap
-            .timeline({
-              scrollTrigger: {
-                trigger: "#cont-dev",
-                start: "top center",
-                end: "bottom bottom",
-                scrub: true,
-              },
-            })
-            .to(planet.scale,
-              { x: 0.6, y: 0.6, z: 0.6 }, 0
-            )
-            .to(planet.position,
-              { y: 160 }, 0
-            )
-            .to(planet.rotation,
-              { y: -1.5 }, 0
-            )
+            .to(planet.scale, { x: 1.5, y: 1.5, z: 1.5 }, 0)
+            .to(planet.position, { x: -400, y: -50 }, 0)
+            .to(planet.rotation, { y: -1.5 }, 0);
         }
 
-      })
-  }, []);
+        if (isMobile) {
+          gsap.set(planet.scale, { x: 0.6, y: 0.6, z: 0.6 }, 0);
+        }
+
+        const timeline2 = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#cont-des",
+            start: "top center",
+            end: "bottom bottom",
+            scrub: true,
+          },
+        })
+          .to(planet.rotation, { y: 1.5 }, 0);
+      });
+
+    return () => {
+      gsap.globalTimeline.clear(); // Limpia todas las animaciones activas
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // Limpia los triggers previos
+    };
+  }, [isMobile]);
+
 
   return (
     <>
-      <div className="canvas-cont">
+      <div className={` ${isMobile ? "absolute" : "fixed" }  w-full h-screen top-0 z-30`}>
 
         {!isLoaded && (
           <div className="loader">
