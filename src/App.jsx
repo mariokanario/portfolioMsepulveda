@@ -51,7 +51,7 @@ function App() {
 
         // TEXTO HEADER
 
-       
+
 
         // Limpia las animaciones previas
         gsap.globalTimeline.clear();
@@ -68,6 +68,11 @@ function App() {
         });
 
         const planet = app.findObjectByName("PlanetContainer");
+        const greenPart = app.findObjectByName("EnvironmentGreen");
+        const bluePart = app.findObjectByName("EnvironmentBlue");
+        const particles = app.findObjectByName("Particulas");
+
+   
 
         if (!isMobile) {
           gsap.to(planet.scale, { x: 0.7, y: 0.7, z: 0.7 }, 0);
@@ -78,26 +83,41 @@ function App() {
               start: "top center",
               end: "bottom bottom",
               scrub: true,
+              onEnter: () => {
+                app.scene.remove(particles);
+              },
+              onUpdate: (self) => {
+                if (self.direction === 1) {
+                  app.scene.remove(particles);
+                }
+              }
             },
           })
+
+          // Animaciones del planeta
+          timeline1
             .to(planet.scale, { x: 1.5, y: 1.5, z: 1.5 }, 0)
             .to(planet.position, { x: -400, y: -50 }, 0)
-            .to(planet.rotation, { y: -1.5 }, 0);
+            .to(planet.rotation, { y: -1.5 }, 0)
+            .to(greenPart.scale, { x: 1, y: 1, z: 1 });
+
+          const timeline2 = gsap.timeline({
+            scrollTrigger: {
+              trigger: "#cont-des",
+              start: "top center",
+              end: "bottom bottom",
+              scrub: true,
+            },
+          })
+            .to(planet.rotation, { y: 1.5 }, 0)
+            .to(bluePart.scale, { x: 1, y: 1, z: 1 });
+
         }
 
         if (isMobile) {
           gsap.set(planet.scale, { x: 0.6, y: 0.6, z: 0.6 }, 0);
         }
 
-        const timeline2 = gsap.timeline({
-          scrollTrigger: {
-            trigger: "#cont-des",
-            start: "top center",
-            end: "bottom bottom",
-            scrub: true,
-          },
-        })
-          .to(planet.rotation, { y: 1.5 }, 0);
       });
 
     return () => {
@@ -109,7 +129,7 @@ function App() {
 
   return (
     <>
-      <div className={` ${isMobile ? "absolute" : "fixed" }  w-full h-screen top-0 z-30`}>
+      <div className={` ${isMobile ? "absolute" : "fixed"}  w-full h-screen top-0 z-[3]`}>
 
         {!isLoaded && (
           <div className="loader">
