@@ -18,7 +18,7 @@ const DesSection = () => {
             image: "/img/skills/photoshop.svg"
         },
         {
-            name: "after effects",
+            name: "aftereffects",
             image: "/img/skills/aftereffects.svg"
         },
         {
@@ -36,10 +36,10 @@ const DesSection = () => {
 
             <h2>UI designer</h2>
             <p>Soy un diseñador UI/UX especializado en crear interfaces digitales únicas y personalizadas. Disfruto de cada etapa del proceso, desde la investigación hasta el desarrollo, poniendo especial atención en los detalles para garantizar resultados excepcionales tanto visual como funcionalmente.</p>
-            <div className='skills-container flex flex-wrap gap-8'>
+            <div className='skills-container grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-8'>
                 {
                     skills.map((skill, index) => (
-                        <figure className='skills text-center flex flex-col justify-between' key={index}>
+                        <figure className='skills text-center flex flex-col justify-start min-h-[120px]' key={index}>
                             <img src={skill.image} alt={skill.name} className='m-auto' />
                             <figcaption>{skill.name}</figcaption>
                         </figure>

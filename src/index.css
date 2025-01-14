@@ -30,7 +30,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
   position: relative;
-  z-index: 100;
+  z-index: 3;
 }
 
 a:hover {

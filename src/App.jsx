@@ -29,9 +29,7 @@ function App() {
 
   useEffect(() => {
     AOS.init();
-  }, []);
 
-  useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -70,9 +68,9 @@ function App() {
         const particles = app.findObjectByName("Particulas");
 
         if (!isMobile) {
-          app.controls.orbitControls.enableRotate = true;
+          app.controls.orbitControls.enableRotate = false;
           app.controls.orbitControls.enableZoom = false;
-          app.controls.orbitControls.enableTouch = true;
+          app.controls.orbitControls.enableTouch = false;
 
           gsap.to(planet.scale, { x: 0.7, y: 0.7, z: 0.7 }, 0);
 
@@ -82,14 +80,6 @@ function App() {
               start: "top center",
               end: "bottom bottom",
               scrub: true,
-              // onEnter: () => {
-              //   app.scene.remove(particles);
-              // },
-              // onUpdate: (self) => {
-              //   if (self.direction === 1) {
-              //     app.scene.remove(particles);
-              //   }
-              // }
             },
           })
 
@@ -116,7 +106,7 @@ function App() {
         if (isMobile) {
           gsap.set(planet.scale, { x: 0.6, y: 0.6, z: 0.6 }, 0);
 
-          particles.visible = false;
+          // particles.visible = false;
 
           gsap.to(bluePart.scale, { x: 1, y: 1, z: 1 }, 0)
           gsap.to(greenPart.scale, { x: 1, y: 1, z: 1 }, 0)

@@ -41,7 +41,7 @@ const DevSection = () => {
 
             <h2>Frontend developer</h2>
             <p>Mi pasión por crear experiencias digitales me llevó a explorar el mundo de la programación. Comencé a dar vida a mis diseños, aprendiendo lenguajes como HTML, CSS y JavaScript, y evolucionando hacia frameworks como React. Hoy en día, disfruto combinando mi creatividad con mis habilidades técnicas para desarrollar sitios web y aplicaciones interactivas y dinámicas.</p>
-            <div className='skills-container flex flex-wrap gap-8'>
+            <div className='skills-container grid grid-cols-4 md:grid-cols-6 lg:grid-cols-7 gap-8'>
                 {
                     skills.map((skill, index) => (
                         <figure className='skills text-center flex flex-col justify-between' key={index}>
