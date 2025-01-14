@@ -70,7 +70,9 @@ function App() {
         const particles = app.findObjectByName("Particulas");
 
         if (!isMobile) {
-          app.controls.orbitControls.enableRotate = false;
+          app.controls.orbitControls.enableRotate = true;
+          app.controls.orbitControls.enableZoom = false;
+          app.controls.orbitControls.enableTouch = true;
 
           gsap.to(planet.scale, { x: 0.7, y: 0.7, z: 0.7 }, 0);
 
@@ -119,7 +121,8 @@ function App() {
           gsap.to(bluePart.scale, { x: 1, y: 1, z: 1 }, 0)
           gsap.to(greenPart.scale, { x: 1, y: 1, z: 1 }, 0)
           app.controls.orbitControls.enableRotate=true;
-          
+          app.controls.orbitControls.enableZoom = true;
+          app.controls.orbitControls.enableTouch = true;      
         }
 
       });
