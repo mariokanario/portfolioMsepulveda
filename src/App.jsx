@@ -49,14 +49,11 @@ function App() {
         setIsLoaded(true);
         setTimeout(() => setShowContent(true), 500);
 
-        // TEXTO HEADER
-
-
-
         // Limpia las animaciones previas
         gsap.globalTimeline.clear();
         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
 
+        // TEXTO HEADER
         gsap.to("#static-text", {
           opacity: 0,
           scrollTrigger: {
@@ -72,9 +69,9 @@ function App() {
         const bluePart = app.findObjectByName("EnvironmentBlue");
         const particles = app.findObjectByName("Particulas");
 
-   
-
         if (!isMobile) {
+          app.controls.orbitControls.enableRotate = false;
+
           gsap.to(planet.scale, { x: 0.7, y: 0.7, z: 0.7 }, 0);
 
           const timeline1 = gsap.timeline({
@@ -83,14 +80,14 @@ function App() {
               start: "top center",
               end: "bottom bottom",
               scrub: true,
-              onEnter: () => {
-                app.scene.remove(particles);
-              },
-              onUpdate: (self) => {
-                if (self.direction === 1) {
-                  app.scene.remove(particles);
-                }
-              }
+              // onEnter: () => {
+              //   app.scene.remove(particles);
+              // },
+              // onUpdate: (self) => {
+              //   if (self.direction === 1) {
+              //     app.scene.remove(particles);
+              //   }
+              // }
             },
           })
 
@@ -116,6 +113,13 @@ function App() {
 
         if (isMobile) {
           gsap.set(planet.scale, { x: 0.6, y: 0.6, z: 0.6 }, 0);
+
+          particles.visible = false;
+
+          gsap.to(bluePart.scale, { x: 1, y: 1, z: 1 }, 0)
+          gsap.to(greenPart.scale, { x: 1, y: 1, z: 1 }, 0)
+          app.controls.orbitControls.enableRotate=true;
+          
         }
 
       });
