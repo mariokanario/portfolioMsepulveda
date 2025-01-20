@@ -110,9 +110,9 @@ function App() {
 
           gsap.to(bluePart.scale, { x: 1, y: 1, z: 1 }, 0)
           gsap.to(greenPart.scale, { x: 1, y: 1, z: 1 }, 0)
-          app.controls.orbitControls.enableRotate=true;
+          app.controls.orbitControls.enableRotate = true;
           app.controls.orbitControls.enableZoom = true;
-          app.controls.orbitControls.enableTouch = true;      
+          app.controls.orbitControls.enableTouch = true;
         }
 
       });
@@ -157,11 +157,13 @@ function App() {
             <span className="hamburger-inner"></span>
           </span>
         </button>
-        <div className="`bar fixed min-w-[200px] w-3/5 lg:w-3/12 h-screen background z-40 flex flex-col justify-center items-center gap-10 bg-emerald-800 transition-all duration-500 top-0 rounded-tl-[2rem] rounded-bl-[2rem]" style={{ right: isActive ? '0' : '-100%' }}>
-          <a className='btn-bar' href="#header">Inicio</a>
-          <a className='btn-bar' href="#cont-dev">Developer</a>
-          <a className='btn-bar' href="#cont-des">Design</a>
-          <a className='btn-bar' href="#contact">Contact</a>
+        <div className="bar fixed min-w-[200px] w-3/5 lg:w-3/12 h-screen background z-40  bg-emerald-800 transition-all duration-500 top-0 rounded-tl-[2rem] rounded-bl-[2rem] content-center" style={{ right: isActive ? '0' : '-100%' }}>
+          <div className="bar-nav flex flex-col justify-center items-center gap-10">
+            <a className='btn-bar' href="#header">Inicio</a>
+            <a className='btn-bar' href="#cont-dev">Developer</a>
+            <a className='btn-bar' href="#cont-des">Design</a>
+            <a className='btn-bar' href="#contact">Contact</a>
+          </div>
         </div>
       </nav>
 
